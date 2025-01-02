@@ -7,6 +7,7 @@ import { Button } from "@bengaluru/components/ui/button"
 import { Card, CardContent } from "@bengaluru/components/ui/card"
 import { questions } from '@bengaluru/lib/questions'
 import { Footer } from '@bengaluru/components/footer'
+import { track } from '@vercel/analytics/react'
 
 type AchievementType = 'lived_all_areas' | 'coffee_expert' | 'startup_survivor' | 'traffic_master' | 'meetup_enthusiast'
 
@@ -25,6 +26,7 @@ export default function PurityTest() {
   }
 
   const calculateScore = () => {
+    track('Calculate Score Clicked')
     const totalScore = selectedItems.size
     const scoreRange = Math.floor(totalScore / 10) * 10
     const achievements: string[] = []

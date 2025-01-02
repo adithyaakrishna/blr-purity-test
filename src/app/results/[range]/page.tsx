@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { getScoreInterpretation, getSpecialAchievement } from '@bengaluru/lib/interpretations'
 import type { SpecialAchievements } from '@bengaluru/lib/interpretations'
 import { Footer } from '@bengaluru/components/footer'
+import { track } from '@vercel/analytics'
 
 interface ResultsPageProps {
   params: Promise<{
@@ -87,12 +88,16 @@ export default function ResultsPage({ params }: ResultsPageProps) {
 
           <div className="space-x-4">
             <Link href="/">
-              <Button variant="outline">
+              <Button 
+                variant="outline"
+                onClick={() => track('try_again_clicked')}
+              >
                 Try Again
               </Button>
             </Link>
             <Button
               onClick={() => {
+                track('Share on X(Twitter) Clicked')
                 const text = `I scored ${score}/110 on the Blr Purity Test!`
                 window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank')
               } }

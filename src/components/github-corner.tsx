@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from '@vercel/analytics';
 import React from 'react';
 
 const GitHubCorner = ({ url = "https://github.com/adithyaakrishna/blr-purity-test" }) => {
@@ -9,6 +10,7 @@ const GitHubCorner = ({ url = "https://github.com/adithyaakrishna/blr-purity-tes
         href={url}
         className="fixed top-0 right-0 z-50"
         aria-label="View source on GitHub"
+        onClick={() => track('Github Repo Click')}
       >
         <svg
           width="80"

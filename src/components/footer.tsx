@@ -1,3 +1,5 @@
+import { track } from "@vercel/analytics";
+
 export function Footer() {
   return (
     <footer className="py-8 text-center bg-gray-50">
@@ -10,6 +12,7 @@ export function Footer() {
             target="_blank" 
             rel="noopener noreferrer" 
             className="text-orange-500 font-medium hover:text-orange-600 transition-colors font-semibold"
+            onClick={() => track('Adi Twitter Profile')}
           >
             Adithya Krishna
           </a>
