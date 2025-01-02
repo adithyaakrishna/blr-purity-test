@@ -1,92 +1,72 @@
-import React, { useState } from 'react';
-import { Checkbox } from "@bengaluru/components/ui/checkbox";
-import { Button } from "@bengaluru/components/ui/button";
-import { Card, CardContent } from "@bengaluru/components/ui/card";
-import { useToast } from '@bengaluru/hooks/use-toast';
-import { questions } from '@bengaluru/lib/questions';
-import { getScoreInterpretation, getSpecialAchievement } from '@bengaluru/lib/interpretations';
+"use client"
+
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Checkbox } from "@bengaluru/components/ui/checkbox"
+import { Button } from "@bengaluru/components/ui/button"
+import { Card, CardContent } from "@bengaluru/components/ui/card"
+import { questions } from '@bengaluru/lib/questions'
+import { Footer } from '@bengaluru/components/footer'
+
+type AchievementType = 'lived_all_areas' | 'coffee_expert' | 'startup_survivor' | 'traffic_master' | 'meetup_enthusiast'
 
 export default function PurityTest() {
-  const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
-  const [score, setScore] = useState<number | null>(null);
-  const { toast } = useToast();
+  const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set())
+  const router = useRouter()
 
   const handleCheckboxChange = (questionIndex: number) => {
-    const newSelected = new Set(selectedItems);
+    const newSelected = new Set(selectedItems)
     if (newSelected.has(questionIndex)) {
-      newSelected.delete(questionIndex);
+      newSelected.delete(questionIndex)
     } else {
-      newSelected.add(questionIndex);
+      newSelected.add(questionIndex)
     }
-    setSelectedItems(newSelected);
-  };
+    setSelectedItems(newSelected)
+  }
 
   const calculateScore = () => {
-    const totalScore = selectedItems.size;
-    const interpretation = getScoreInterpretation(totalScore);
-    const achievements: string[] = [];
+    const totalScore = selectedItems.size
+    const scoreRange = Math.floor(totalScore / 10) * 10
+    const achievements: string[] = []
+
+    const achievementChecks: Array<{ indices: number[], type: AchievementType }> = [
+      { indices: [13, 14, 15], type: 'lived_all_areas' },
+      { indices: [20, 21, 22], type: 'coffee_expert' },
+      { indices: [30, 31, 32], type: 'startup_survivor' },
+      { indices: [40, 41, 42], type: 'traffic_master' },
+      { indices: [50, 51, 52], type: 'meetup_enthusiast' }
+    ]
+
+    achievementChecks.forEach(({ indices, type }) => {
+      if (indices.every(index => selectedItems.has(index))) {
+        achievements.push(type)
+      }
+    })
+
+    // Encode all data in a single base64 parameter
+    const data = btoa(JSON.stringify({
+      s: totalScore,
+      a: achievements
+    }))
     
-    // Example check for "lived_all_areas" achievement
-    if (selectedItems.has(13) && selectedItems.has(14) && selectedItems.has(15)) {
-      achievements.push(getSpecialAchievement('lived_all_areas'));
-    }
-
-    // Add more achievement checks as needed
-    if (selectedItems.has(20) && selectedItems.has(21) && selectedItems.has(22)) {
-      achievements.push(getSpecialAchievement('coffee_expert'));
-    }
-
-    if (selectedItems.has(30) && selectedItems.has(31) && selectedItems.has(32)) {
-      achievements.push(getSpecialAchievement('startup_survivor'));
-    }
-
-    if (selectedItems.has(40) && selectedItems.has(41) && selectedItems.has(42)) {
-      achievements.push(getSpecialAchievement('traffic_master'));
-    }
-
-    if (selectedItems.has(50) && selectedItems.has(51) && selectedItems.has(52)) {
-      achievements.push(getSpecialAchievement('meetup_enthusiast'));
-    }
-    
-    toast({
-      title: `Your Score: ${totalScore}/100`,
-      description: (
-        <div className="mt-2">
-          <p className="mb-2">{interpretation}</p>
-          {achievements.length > 0 && (
-            <div className="mt-4">
-              <strong>Special Achievements Unlocked:</strong>
-              <ul className="list-disc pl-4 mt-2">
-                {achievements.map((achievement, i) => (
-                  <li key={i}>{achievement}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      ),
-      duration: 10000,
-    });
-    
-    setScore(totalScore);
-  };
+    router.push(`/results/${scoreRange}?d=${data}`)
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold tracking-tight text-orange-500 mb-4">
-            Bangalore Tech Purity Test
-          </h1>
-          <p className="text-lg text-gray-600">
-            The official Purity Test checklist for the techies of Bangalore.
-            Click on every item you have done.
-          </p>
-          <p className="text-sm font-semibold text-gray-800 mt-2">
-            Caution: This is not a bucket-list. Completion of all items on this test
-            will make you a loser.
-          </p>
-        </div>
+       <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold tracking-tight text-orange-500 mb-4">
+          Bengaluru Purity Test
+        </h1>
+        <p className="text-lg text-gray-600 mb-3">
+          Namaskara! 🙏 <br /> The official checklist for techies surviving and thriving in India's Silicon Valley.
+          Check every item you've experienced in your Bengaluru tech journey.
+        </p>
+        <p className="text-sm font-semibold text-gray-800">
+          Caution: This is not your startup's roadmap. Scoring 100% means you've spent too much time at Third Wave Coffee and not enough time coding. ☕
+        </p>
+      </div>
 
         <Card className="mb-8">
           <CardContent className="pt-6">
@@ -119,6 +99,7 @@ export default function PurityTest() {
           </Button>
         </div>
       </div>
+      <Footer />
     </div>
-  );
+  )
 }
