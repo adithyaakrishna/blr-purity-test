@@ -19,7 +19,7 @@
       }
     ],
     "paths": {
-      "@Bengaluru/*": ["./src/*"]
+      "@bengaluru/*": ["./src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
