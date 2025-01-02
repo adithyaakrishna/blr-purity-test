@@ -60,11 +60,11 @@ export default function PurityTest() {
           Bengaluru Purity Test
         </h1>
         <p className="text-lg text-gray-600 mb-3">
-          Namaskara! 🙏 <br /> The official checklist for techies surviving and thriving in India's Silicon Valley.
-          Check every item you've experienced in your Bengaluru tech journey.
+          Namaskara! 🙏 <br /> The official checklist for techies surviving and thriving in India&apos;s Silicon Valley.
+          Check every item you&apos;ve experienced in your Bengaluru tech journey.
         </p>
         <p className="text-sm font-semibold text-gray-800">
-          Caution: This is not your startup's roadmap. Scoring 100% means you've spent too much time at Third Wave Coffee and not enough time coding. ☕
+          Caution: This is not your startup&apos;s roadmap. Scoring 100% means you&apos;ve spent too much time at Third Wave Coffee and not enough time coding. ☕
         </p>
       </div>
 
