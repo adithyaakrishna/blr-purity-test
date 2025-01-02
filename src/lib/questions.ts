@@ -57,7 +57,7 @@ export const bingoQuestions: BangaloreTechBingo = {
     "Attended Google DevFest",
     "Used BMTC bus timing as an excuse",
     "Lived in a PG with 'strict rules'",
-    "Shared a flat with 4+ techies",
+    "Shared a flat with 4+ techies/non-techies",
     "Changed house because no IT company cab pickup",
     "Bought furniture from second hand shop",
     "Used second hand office chairs at startup",

@@ -62,7 +62,7 @@ export default function PurityTest() {
           Blr Purity Test
         </h1>
         <p className="text-lg text-gray-600 mb-3">
-          Namaskara! 🙏 <br /> The official checklist for techies surviving and thriving in India&apos;s Silicon Valley.
+          Namaskara! 🙏 <br /> The official checklist for techies/non-techies surviving and thriving in India&apos;s Silicon Valley.
           Check every item you&apos;ve experienced in your Bengaluru tech journey.
         </p>
         <p className="text-sm font-semibold text-gray-800">

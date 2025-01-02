@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Blr Purity Test",
-  description: "The official purity test checklist for the techies of Bengaluru. Find out how deep you're into the Bengaluru tech scene!",
+  description: "The official purity test checklist for the techies/non-techies of Bengaluru. Find out how deep you're into the Bengaluru tech scene!",
   keywords: [
     "Bengaluru Tech",
     "Tech Culture",
